@@ -3,6 +3,7 @@ media-tv
 media-video
 net-dialup
 net-wireless
+sys-apps
 sys-block
 sys-firmware
 sys-kernel
