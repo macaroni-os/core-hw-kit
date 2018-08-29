@@ -4,6 +4,7 @@
 
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/ca-certificates:insecure_certs - Install certificates which are known to be untrustworthy.
+net-misc/dhcpcd:embedded - Embed the definitions of dhcp options in the dhcpcd executable
 sys-apps/lm_sensors:contrib - Installs user contributed configuration files so you don't need to find settings on your own for your system if somebody else has already created such a configuration for sensors/mainboards you are using.
 sys-apps/lm_sensors:sensord - Enable sensord - a daemon that can be used to periodically log sensor readings from hardware health-monitoring chips
 sys-firmware/edk2-ovmf:binary - Use pre-built binaries
