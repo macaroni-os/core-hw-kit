@@ -8,5 +8,6 @@ sys-apps
 sys-block
 sys-firmware
 sys-kernel
+sys-libs
 sys-power
 x11-drivers
