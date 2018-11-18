@@ -9,5 +9,5 @@ RDEPEND=!<sys-apps/microcode-ctl-1.17-r2 >=app-admin/ego-2.5.0.4
 RESTRICT=binchecks strip
 SLOT=0
 SRC_URI=https://downloadmirror.intel.com/28087/eng/microcode-20180807.tgz https://dev.gentoo.org/~whissi/dist/intel-microcode/intel-microcode-collection-20180808.tar.xz
-_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=e2dbf5f806711562edbd301eff5be484
