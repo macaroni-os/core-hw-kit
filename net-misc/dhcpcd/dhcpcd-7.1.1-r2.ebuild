@@ -13,7 +13,7 @@ else
 	MY_P="${MY_P/_beta/-beta}"
 	MY_P="${MY_P/_rc/-rc}"
 	SRC_URI="https://roy.marples.name/downloads/${PN}/${MY_P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 	S="${WORKDIR}/${MY_P}"
 fi
 
@@ -29,6 +29,7 @@ RDEPEND="${COMMON_DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-disable_inet6_fix.patch #677508
+	"${FILESDIR}"/${PN}-7.1.1-overflows.patch
 )
 
 src_configure() {
