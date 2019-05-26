@@ -8,5 +8,5 @@ LICENSE=ipw3945
 RDEPEND=!=sys-firmware/iwl5000-ucode-8.83.5.1
 SLOT=2
 SRC_URI=http://linuxwireless.org/attachments/en/users/Drivers/iwlwifi/iwlwifi-5000-ucode-8.83.5.1-1.tgz
-_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	b45201c4e6c096b98e250336954e64b9
+_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=b136d072874be75b212e8e5713bc8020
