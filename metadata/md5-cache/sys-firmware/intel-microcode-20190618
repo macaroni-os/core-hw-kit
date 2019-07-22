@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst preinst prepare pretend setup unpack
+DEPEND=sys-apps/iucode_tool
+DESCRIPTION=Intel IA32/IA64 microcode update data
+EAPI=6
+HOMEPAGE=http://inertiawar.com/microcode/ https://downloadcenter.intel.com/Detail_Desc.aspx?DwnldID=28087
+IUSE=+split-ucode +vanilla kernel_linux
+KEYWORDS=-* amd64 x86
+LICENSE=intel-ucode
+RDEPEND=!<sys-apps/microcode-ctl-1.17-r2 >=app-admin/ego-2.5.0.4
+RESTRICT=binchecks strip
+SLOT=0
+SRC_URI=https://dev.gentoo.org/~whissi/dist/intel-microcode/intel-microcode-collection-20190623.tar.xz https://www.github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/tarball/microcode-20190618 -> intel-microcode-microcode-20190618.tar.gz
+_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	b2f01ad412baf81650c23fcf0975fa33	toolchain-funcs	f164325a2cdb5b3ea39311d483988861
+_md5_=0366cb51f1684720b3e4da7b33dcd62c
