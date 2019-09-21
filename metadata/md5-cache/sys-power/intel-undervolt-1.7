@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig virtual/pkgconfig
+DEFINED_PHASES=compile configure postinst setup
+DEPEND=elogind? ( sys-auth/elogind )
+DESCRIPTION=Intel CPU undervolting and throttling configuration tool
+EAPI=7
+HOMEPAGE=https://github.com/kitsunyan/intel-undervolt
+IUSE=elogind systemd kernel_linux
+KEYWORDS=-* ~amd64
+LICENSE=GPL-3
+RDEPEND=elogind? ( sys-auth/elogind )
+SLOT=0
+SRC_URI=https://github.com/kitsunyan/intel-undervolt/archive/1.7.tar.gz -> intel-undervolt-1.7.tar.gz
+_eclasses_=linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	b2f01ad412baf81650c23fcf0975fa33	systemd	47c677ae1d7b69031f11f630ac09f0d1	toolchain-funcs	f164325a2cdb5b3ea39311d483988861
+_md5_=496e8be158e974d94736317c1197b5d5
