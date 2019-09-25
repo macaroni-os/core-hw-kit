@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit savedconfig
+inherit mount-boot savedconfig
 
 if [[ ${PV} == 99999999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/${PN}.git"
 else
-	GIT_COMMIT="711d3297bac870af42088a467459a0634c1970ca"
+	GIT_COMMIT="6ddb9d9704e2171d91439c9c42c5965bf3863de8"
 	SRC_URI="https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="alpha amd64 arm arm64 hppa ia64 mips ppc ppc64 s390 sh sparc x86"
 fi
@@ -21,10 +21,15 @@ LICENSE="GPL-2 GPL-2+ GPL-3 BSD MIT || ( MPL-1.1 GPL-2 )
 		linux-fw-redistributable ( BSD-2 BSD BSD-4 ISC MIT no-source-code ) )
 	unknown-license? ( all-rights-reserved )"
 SLOT="0"
-IUSE="+redistributable savedconfig unknown-license"
+IUSE="initramfs +redistributable savedconfig unknown-license"
 RESTRICT="binchecks strip
 	unknown-license? ( bindist )"
 
+REQUIRED_USE="initramfs? ( redistributable )"
+
+BDEPEND="initramfs? ( app-arch/cpio )"
+
+#add anything else that collides to this
 RDEPEND="!savedconfig? (
 		redistributable? (
 			!sys-firmware/alsa-firmware[alsa_cards_ca0132]
@@ -69,7 +74,9 @@ RDEPEND="!savedconfig? (
 		)
 	)"
 
-#add anything else that collides to this
+pkg_pretend() {
+	use initramfs && mount-boot_pkg_pretend
+}
 
 src_unpack() {
 	if [[ ${PV} == 99999999* ]]; then
@@ -226,6 +233,7 @@ src_prepare() {
 
 	# remove sources and documentation (wildcards are expanded)
 	rm -r ${source_files[@]} || die
+	rm -rf .git
 
 	if use !unknown-license; then
 		# remove files in unknown_license
@@ -236,37 +244,52 @@ src_prepare() {
 		# remove files _not_ in the free_software or unknown_license lists
 		# everything else is confirmed (or assumed) to be redistributable
 		# based on upstream acceptance policy
-		local file remove=()
-		while IFS= read -d "" -r file; do
-			has "${file#./}" "${free_software[@]}" "${unknown_license[@]}" \
-				|| remove+=("${file}")
-		done < <(find * ! -type d -print0 || die)
-		printf "%s\0" "${remove[@]}" | xargs -0 rm || die
+		local IFS=$'\n'
+		find ! -type d -printf "%P\n" \
+			| grep -Fvx -e "${free_software[*]}" -e "${unknown_license[*]}" \
+			| xargs -d '\n' rm || die
+		IFS=$' \t\n'
+	fi
+
+	if use initramfs; then
+		if [[ -d "${S}/amd-ucode" ]]; then
+			local UCODETMP="${T}/ucode_tmp"
+			local UCODEDIR="${UCODETMP}/kernel/x86/microcode"
+			mkdir -p "${UCODEDIR}" || die
+			echo 1 > "${UCODETMP}/early_cpio"
+
+			local amd_ucode_file="${UCODEDIR}/AuthenticAMD.bin"
+			cat "${S}"/amd-ucode/*.bin > "${amd_ucode_file}" || die "Failed to concat amd cpu ucode"
+
+			if [[ ! -s "${amd_ucode_file}" ]]; then
+				die "Sanity check failed: '${amd_ucode_file}' is empty!"
+			fi
+
+			pushd "${UCODETMP}" &>/dev/null || die
+			find . -print0 | cpio --quiet --null -o -H newc -R 0:0 > "${S}"/amd-uc.img
+			popd &>/dev/null || die
+			if [[ ! -s "${S}/amd-uc.img" ]]; then
+				die "Failed to create '${S}/amd-uc.img'!"
+			fi
+		else
+			# If this will ever happen something has changed which
+			# must be reviewed
+			die "'${S}/amd-ucode' not found!"
+		fi
 	fi
 
 	echo "# Remove files that shall not be installed from this list." > ${PN}.conf
-	find * ! -type d ! -name ${PN}.conf >> ${PN}.conf
+	find * ! -type d ! \( -name ${PN}.conf -o -name amd-uc.img \) >> ${PN}.conf
 
 	if use savedconfig; then
 		restore_config ${PN}.conf
 
-		local file preserved_files=() remove=()
-
 		ebegin "Removing all files not listed in config"
-		while IFS= read -r file; do
-			# Ignore comments.
-			if [[ ${file} != "#"* ]]; then
-				preserved_files+=("${file}")
-			fi
-		done < ${PN}.conf || die
-
-		while IFS= read -d "" -r file; do
-			has "${file}" "${preserved_files[@]}" || remove+=("${file}")
-		done < <(find * ! -type d ! -name ${PN}.conf -print0 || die)
-		if [[ ${#remove[@]} -gt 0 ]]; then
-			printf "%s\0" "${remove[@]}" | xargs -0 rm || die
-		fi
-		eend 0
+		find ! -type d ! \( -name ${PN}.conf -o -name amd-uc.img \) -printf "%P\n" \
+			| grep -Fvx -f <(grep -v '^#' ${PN}.conf \
+				|| die "grep failed, empty config file?") \
+			| xargs -d '\n' --no-run-if-empty rm
+		eend $? || die
 	fi
 
 	# remove empty directories, bug #396073
@@ -274,10 +297,13 @@ src_prepare() {
 }
 
 src_install() {
-	if use !savedconfig; then
-		save_config ${PN}.conf
-	fi
+	save_config ${PN}.conf
 	rm ${PN}.conf || die
+
+	if use initramfs ; then
+		mkdir "${ED}/boot" || die
+		mv "${S}"/amd-uc.img "${ED}/boot" || die
+	fi
 
 	if ! ( shopt -s failglob; : * ) 2>/dev/null; then
 		eerror "No files to install. Check your USE flag settings"
@@ -293,6 +319,9 @@ pkg_preinst() {
 	if use savedconfig; then
 		ewarn "USE=savedconfig is active. You must handle file collisions manually."
 	fi
+
+	# Make sure /boot is available if needed.
+	use initramfs && mount-boot_pkg_preinst
 }
 
 pkg_postinst() {
@@ -309,4 +338,17 @@ pkg_postinst() {
 			break
 		fi
 	done
+
+	# Don't forget to umount /boot if it was previously mounted by us.
+	use initramfs && mount-boot_pkg_postinst
+}
+
+pkg_prerm() {
+	# Make sure /boot is mounted so that we can remove /boot/amd-uc.img!
+	use initramfs && mount-boot_pkg_prerm
+}
+
+pkg_postrm() {
+	# Don't forget to umount /boot if it was previously mounted by us.
+	use initramfs && mount-boot_pkg_postrm
 }
