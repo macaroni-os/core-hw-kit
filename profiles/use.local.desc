@@ -5,6 +5,13 @@
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/ca-certificates:insecure_certs - Install certificates which are known to be untrustworthy.
 net-misc/dhcpcd:embedded - Embed the definitions of dhcp options in the dhcpcd executable
+sys-apps/fwupd:colorhug - Enable ColorHug support through x11-misc/colord package.
+sys-apps/fwupd:dell - Enable Dell-specific support.
+sys-apps/fwupd:gpg - Enable GPG support.
+sys-apps/fwupd:man - Build and install man pages
+sys-apps/fwupd:pkcs7 - Enable PKCS7 verification support via net-libs/gnutls.
+sys-apps/fwupd:uefi - Enable UEFI support
+sys-apps/fwupd:uefi_labels - Enable UEFI labels support
 sys-apps/lm_sensors:contrib - Installs user contributed configuration files so you don't need to find settings on your own for your system if somebody else has already created such a configuration for sensors/mainboards you are using.
 sys-apps/lm_sensors:sensord - Enable sensord - a daemon that can be used to periodically log sensor readings from hardware health-monitoring chips
 sys-firmware/edk2-ovmf:binary - Use pre-built binaries
@@ -25,7 +32,10 @@ sys-firmware/seabios:seavgabios - Include SeaVGABIOS binaries (replacement for v
 sys-firmware/sgabios:binary - Use pre-built binaries
 sys-firmware/sigrok-firmware-fx2lafw:binary - Use official upstream pre-built binaries
 sys-firmware/vgabios:binary - Use official upstream pre-built binaries (only default and cirrus images)
+sys-kernel/linux-firmware:initramfs - Create and install initramfs for early microcode loading in /boot (only AMD for now)
+sys-kernel/linux-firmware:redistributable - Install also non-free (but redistributable) firmware files
 sys-kernel/linux-firmware:savedconfig - Allows individual selection of firmware files
+sys-kernel/linux-firmware:unknown-license - Install firmware files whose license is unknown
 sys-libs/timezone-data:leaps_timezone - Install the set of "right" timezones; these timezones include leap seconds when counting seconds since the epoch (while POSIX does not) as they are based on the TAI (International Atomic Time) clock
 x11-drivers/nvidia-drivers:X - Install the X.org driver, OpenGL libraries, XvMC libraries, and VDPAU libraries
 x11-drivers/nvidia-drivers:compat - Install non-GLVND libGL for backwards compatibility
