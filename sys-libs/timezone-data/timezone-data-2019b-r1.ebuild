@@ -1,21 +1,21 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 inherit toolchain-funcs flag-o-matic
 
 code_ver=${PV}
 data_ver=${PV}
 DESCRIPTION="Timezone data (/usr/share/zoneinfo) and utilities (tzselect/zic/zdump)"
-HOMEPAGE="https://www.iana.org/time-zones http://www.twinsun.com/tz/tz-link.htm"
+HOMEPAGE="https://www.iana.org/time-zones"
 SRC_URI="https://www.iana.org/time-zones/repository/releases/tzdata${data_ver}.tar.gz
 	https://www.iana.org/time-zones/repository/releases/tzcode${code_ver}.tar.gz"
 
 LICENSE="BSD public-domain"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris"
-IUSE="nls leaps_timezone elibc_FreeBSD"
+KEYWORDS="*"
+IUSE="nls leaps-timezone elibc_FreeBSD"
 
 DEPEND="nls? ( virtual/libintl )"
 RDEPEND="${DEPEND}
@@ -25,6 +25,11 @@ S=${WORKDIR}
 
 src_prepare() {
 	default
+
+	# check_web contacts validator.w3.org
+	sed -i -e 's/check_tables check_web/check_tables/g' \
+		Makefile || die "Failed to disable check_web"
+
 	tc-is-cross-compiler && cp -pR "${S}" "${S}"-native
 }
 
@@ -51,7 +56,7 @@ src_configure() {
 
 _emake() {
 	emake \
-		REDO=$(usex leaps_timezone posix_right posix_only) \
+		REDO=$(usex leaps-timezone posix_right posix_only) \
 		TZDATA_TEXT= \
 		TOPDIR="${EPREFIX}" \
 		ZICDIR='$(TOPDIR)/usr/bin' \
@@ -88,13 +93,17 @@ src_install() {
 	tc-is-cross-compiler && zic="zic=${S}-native/zic"
 	_emake install ${zic} DESTDIR="${D}" LIBDIR="/nukeit"
 	rm -rf "${D}/nukeit" "${ED}/etc" || die
+
+	insinto /usr/share/zoneinfo
+	doins "${S}"/leap-seconds.list
+
 	# Delete man pages installed by man-pages package.
 	rm "${ED}"/usr/share/man/man5/tzfile.5* "${ED}"/usr/share/man/man8/{tzselect,zdump,zic}.8 || die
 	dodoc CONTRIBUTING README NEWS *.html
 }
 
 get_TIMEZONE() {
-	local tz src="${EROOT}etc/timezone"
+	local tz src="${EROOT}/etc/timezone"
 	if [[ -e ${src} ]] ; then
 		tz=$(sed -e 's:#.*::' -e 's:[[:space:]]*::g' -e '/^$/d' "${src}")
 	else
@@ -126,11 +135,11 @@ pkg_preinst() {
 
 configure_tz_data() {
 	# make sure the /etc/localtime file does not get stale #127899
-	local tz src="${EROOT}etc/timezone" etc_lt="${EROOT}etc/localtime"
+	local tz src="${EROOT}/etc/timezone" etc_lt="${EROOT}/etc/localtime"
 
 	# If it's a symlink, assume the user knows what they're doing and
 	# they're managing it themselves. #511474
-	if [[ -L ${etc_lt} ]] ; then
+	if [[ -L "${etc_lt}" ]] ; then
 		einfo "Assuming your ${etc_lt} symlink is what you want; skipping update."
 		return 0
 	fi
@@ -139,10 +148,10 @@ configure_tz_data() {
 		einfo "Assuming your empty ${etc_lt} file is what you want; skipping update."
 		return 0
 	fi
-	if [[ ${tz} == "FOOKABLOIE" ]] ; then
+	if [[ "${tz}" == "FOOKABLOIE" ]] ; then
 		elog "You do not have TIMEZONE set in ${src}."
 
-		if [[ ! -e ${etc_lt} ]] ; then
+		if [[ ! -e "${etc_lt}" ]] ; then
 			cp -f "${EROOT}"/usr/share/zoneinfo/Factory "${etc_lt}"
 			elog "Setting ${etc_lt} to Factory."
 		else
@@ -151,13 +160,13 @@ configure_tz_data() {
 		return 0
 	fi
 
-	if [[ ! -e ${EROOT}/usr/share/zoneinfo/${tz} ]] ; then
+	if [[ ! -e "${EROOT}/usr/share/zoneinfo/${tz}" ]] ; then
 		elog "You have an invalid TIMEZONE setting in ${src}"
 		elog "Your ${etc_lt} has been reset to Factory; enjoy!"
 		tz="Factory"
 	fi
-	einfo "Updating ${etc_lt} with ${EROOT}usr/share/zoneinfo/${tz}"
-	cp -f "${EROOT}"/usr/share/zoneinfo/"${tz}" "${etc_lt}"
+	einfo "Updating ${etc_lt} with ${EROOT}/usr/share/zoneinfo/${tz}"
+	cp -f "${EROOT}/usr/share/zoneinfo/${tz}" "${etc_lt}"
 }
 
 pkg_config() {
