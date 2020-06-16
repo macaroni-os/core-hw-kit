@@ -1,9 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
-PYTHON_COMPAT=( python{2_7,3_{5,6}} )
+PYTHON_COMPAT=( python3+ )
 
 inherit eutils toolchain-funcs python-any-r1
 
@@ -12,20 +11,15 @@ inherit eutils toolchain-funcs python-any-r1
 # git clone git://git.seabios.org/seabios.git && cd seabios
 # git archive --output seabios-${PV}.tar.gz --prefix seabios-${PV}/ rel-${PV}
 
-if [[ ${PV} == *9999* || -n "${EGIT_COMMIT}" ]] ; then
-	EGIT_REPO_URI="git://git.seabios.org/seabios.git"
-	inherit git-r3
-else
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="*"
 
 	# Binary versions taken from fedora:
 	# http://download.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/x86_64/os/Packages/s/
-	#   seabios-bin-1.10.2-1.fc27.noarch.rpm
-	#   seavgabios-bin-1.10.2-1.fc27.noarch.rpm
+	#   seabios-bin-1.12.1-2.fc31.noarch.rpm
+	#   seavgabios-bin-1.12.1-2.fc31.noarch.rpm
 	SRC_URI="
 		!binary? ( https://code.coreboot.org/p/seabios/downloads/get/${P}.tar.gz )
 		binary? ( https://dev.gentoo.org/~tamiko/distfiles/${P}-bin.tar.xz )"
-fi
 
 DESCRIPTION="Open Source implementation of a 16-bit x86 BIOS"
 HOMEPAGE="https://www.seabios.org/"
