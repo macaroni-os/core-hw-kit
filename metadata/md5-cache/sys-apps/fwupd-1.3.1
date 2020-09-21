@@ -4,7 +4,7 @@ DEPEND=python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-e
 DESCRIPTION=Aims to make updating firmware on Linux automatic, safe and reliable
 EAPI=7
 HOMEPAGE=https://fwupd.org
-IUSE=agent +colorhug consolekit +dell doc elogind +gpg +intel-amt +man +nvme +pkcs7 +redfish +synaptics systemd test +thunderbolt +uefi python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
+IUSE=agent +colorhug consolekit +dell doc elogind +gpg +intel-amt +man +nvme +pkcs7 +redfish +synaptics systemd test +thunderbolt +uefi python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
 KEYWORDS=*
 LICENSE=LGPL-2.1+
 PDEPEND=sys-apps/dbus
@@ -12,5 +12,5 @@ RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-
 REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 ) ^^ ( consolekit elogind systemd ) dell? ( uefi )
 SLOT=0
 SRC_URI=https://github.com/hughsie/fwupd/archive/1.3.1.tar.gz -> fwupd-1.3.1.tar.gz
-_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-single-r1	a811e2c445a5fb40db1a1eba728dca7f	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	vala	682da46cf615b9f7a7d3680058139dcd	xdg-utils	14d00d009167652b1fa363e55effe213
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	vala	682da46cf615b9f7a7d3680058139dcd	xdg-utils	14d00d009167652b1fa363e55effe213
 _md5_=7130bd7fd4548bc73620bfe6e00e32d8
