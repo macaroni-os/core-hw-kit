@@ -1,25 +1,16 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit linux-info linux-mod
 
-HOMEPAGE="https://github.com/teleshoes/acpi_call"
-if [ "${PV}" = "9999" ]; then
-	inherit git-r3
-	EGIT_REPO_URI="${HOMEPAGE}.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
-fi
-
+HOMEPAGE="https://github.com/nix-community/acpi_call"
 DESCRIPTION="A kernel module that enables you to call ACPI methods"
+SRC_URI="${HOMEPAGE}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="*"
 IUSE=""
 
 CONFIG_CHECK="ACPI"
