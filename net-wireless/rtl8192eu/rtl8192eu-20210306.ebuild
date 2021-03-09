@@ -5,7 +5,7 @@ inherit linux-mod
 
 DESCRIPTION="Realtek 8192EU driver module for Linux kernel"
 HOMEPAGE="https://github.com/Mange/rtl8192eu-linux-driver"
-SRC_URI="https://github.com/Mange/rtl8192eu-linux-driver/archive/7e8858e0dfc10c025c8d114330f6c7d0353b4819.tar.gz -> rtl8192eu-20210206.tar.gz"
+SRC_URI="https://github.com/Mange/rtl8192eu-linux-driver/archive/6a758d54cf2d9691a53ddf15acb25b6ec0cc7d05.tar.gz -> rtl8192eu-20210306.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
