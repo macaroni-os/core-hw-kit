@@ -1,5 +1,5 @@
 BDEPEND=initramfs? ( app-arch/cpio )
-DEFINED_PHASES=install postinst postrm preinst prepare prerm pretend
+DEFINED_PHASES=install postinst postrm preinst prepare prerm
 DESCRIPTION=Linux firmware files
 EAPI=7
 HOMEPAGE=https://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
@@ -12,4 +12,4 @@ RESTRICT=strip test unknown-license? ( bindist )
 SLOT=0
 SRC_URI=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20210511.tar.gz
 _eclasses_=mount-boot	4e916386c166c23418f8bea81a5f131e	portability	2b88d3ecc35035a3b8ab628b49cafb0e	savedconfig	1de3f25f1039cd1772fbf707ef87dbe3
-_md5_=2542216a54393b222ecdb36b2fab3efe
+_md5_=161d5a9baab3ca17007583b0787e010c
