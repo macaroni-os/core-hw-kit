@@ -9,6 +9,6 @@ LICENSE=intel-ucode
 RDEPEND=!<sys-apps/microcode-ctl-1.17-r2 >=app-admin/ego-2.5.0.4
 RESTRICT=binchecks strip
 SLOT=0
-SRC_URI=!vanilla? ( https://dev.gentoo.org/~whissi/dist/intel-microcode/intel-microcode-collection-20210514.tar.xz ) https://api.github.com/repos/intel/Intel-Linux-Processor-Microcode-Data-Files/tarball/microcode-20210216 -> microcode-20210216.tar.gz
+SRC_URI=!vanilla? ( https://dev.gentoo.org/~whissi/dist/intel-microcode/intel-microcode-collection-20210514.tar.xz ) https://api.github.com/repos/intel/Intel-Linux-Processor-Microcode-Data-Files/tarball/microcode-20210608 -> microcode-20210608.tar.gz
 _eclasses_=linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=f522938f64b7d00dddcd504545e134cc
+_md5_=227ad5edfce779c10f441d04268dd37c
