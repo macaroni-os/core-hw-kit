@@ -1,5 +1,9 @@
 app-admin
+app-benchmarks
+app-laptop
 app-misc
+app-mobilephone
+app-pda
 media-video
 net-dialup
 net-misc
@@ -10,4 +14,3 @@ sys-firmware
 sys-kernel
 sys-libs
 sys-power
-x11-drivers
