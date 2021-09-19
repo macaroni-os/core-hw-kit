@@ -19,3 +19,14 @@ src_unpack() {
 	unpack ${A}
 	mv "${WORKDIR}"/rtl8821CU-* "${S}"
 }
+
+src_prepare() {
+	default
+
+	# FL-8716: Use the latest kernel instead of the currently running one.
+	get_version
+
+	sed -i \
+		-e "s|\$(shell uname -r)|${KV_FULL}|g" \
+		Makefile
+}
