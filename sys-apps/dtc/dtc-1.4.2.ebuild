@@ -1,10 +1,16 @@
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit toolchain-funcs eutils
+inherit multilib toolchain-funcs eutils
 
-SRC_URI="{{artifacts[0].src_uri}}"
-KEYWORDS="*"
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/dtc/dtc.git"
+	inherit git-r3
+else
+	SRC_URI="mirror://kernel/software/utils/${PN}/${P}.tar.xz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+fi
 
 DESCRIPTION="Open Firmware device tree compiler"
 HOMEPAGE="https://devicetree.org/ https://git.kernel.org/cgit/utils/dtc/dtc.git/"
@@ -18,8 +24,6 @@ DEPEND="
 	sys-devel/flex
 "
 DOCS="
-	Documentation/dt-object-internal.txt
-	Documentation/dts-format.txt
 	Documentation/manual.txt
 "
 
