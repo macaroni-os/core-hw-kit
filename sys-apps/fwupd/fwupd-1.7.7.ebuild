@@ -13,7 +13,7 @@ SRC_URI="https://github.com/fwupd/fwupd/tarball/76821bcb78b7557d879f5d723d6faf27
 LICENSE="LGPL-2.1+"
 SLOT="0"
 KEYWORDS="*"
-IUSE="amt archive bash-completion bluetooth +dell +elogind fastboot flashrom gnutls gtk-doc gusb introspection logitech lzma +man minimal modemmanager nvme policykit spi +sqlite synaptics test thunderbolt tpm uefi"
+IUSE="amt archive bash-completion bluetooth +dell +elogind fastboot flashrom +gnutls gtk-doc gusb introspection logitech lzma +man minimal modemmanager nvme policykit spi +sqlite synaptics test thunderbolt tpm +uefi"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	^^ ( elogind minimal )
 	dell? ( uefi )
