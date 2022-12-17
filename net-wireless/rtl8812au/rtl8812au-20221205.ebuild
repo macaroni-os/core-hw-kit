@@ -4,7 +4,7 @@ inherit linux-mod
 
 DESCRIPTION="Realtek 8812AU driver module for the Linux Kernel and Android"
 HOMEPAGE="https://github.com/aircrack-ng/rtl8812au"
-SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/afd38cc6841dfcc9cd7198c5daf30926cfc2eb68.tar.gz -> rtl8812au-20221105.tar.gz"
+SRC_URI="https://github.com/aircrack-ng/rtl8812au/archive/450db78f7bd23f0c611553eb475fa5b5731d6497.tar.gz -> rtl8812au-20221205.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="-* amd64 x86 arm64 arm"
