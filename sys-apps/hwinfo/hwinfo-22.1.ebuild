@@ -8,7 +8,7 @@ DESCRIPTION="Hardware detection tool used in SuSE Linux"
 HOMEPAGE="https://github.com/openSUSE/hwinfo/"
 # The SRC_URI is a source rpm package because the github repo misses some features and there
 # are way too many tags to go trough until we hit the appropriate one
-SRC_URI="https://download.opensuse.org/source/tumbleweed/repo/oss/src/hwinfo-22.1-2.1.src.rpm -> hwinfo-22.1.rpm"
+SRC_URI="https://download.opensuse.org/source/tumbleweed/repo/oss/src/./hwinfo-22.1-2.1.src.rpm -> hwinfo-22.1.rpm"
 
 LICENSE="GPL-2"
 SLOT="0"
