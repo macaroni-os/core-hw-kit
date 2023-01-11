@@ -20,6 +20,12 @@ DEPEND="${RDEPEND}
 	sys-devel/flex
 	>=sys-kernel/linux-headers-2.6.17"
 
+post_src_unpack() {
+	if [ ! -d "${S}" ] ; then
+		mv "${WORKDIR}"/openSUSE-hwinfo-* "${S}" || die
+	fi
+}
+
 src_prepare() {
 	echo "${PV}" > VERSION
 	sed -i "s/changelog//g" Makefile
