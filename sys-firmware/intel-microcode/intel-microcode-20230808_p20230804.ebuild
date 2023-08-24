@@ -7,8 +7,8 @@ inherit linux-info toolchain-funcs
 COLLECTION_SNAPSHOT="${PV##*_p}"
 DESCRIPTION="Intel IA32/IA64 microcode update data"
 HOMEPAGE="https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files http://inertiawar.com/microcode/"
-SRC_URI="!vanilla? ( https://dev.gentoo.org/~sam/distfiles/sys-firmware/intel-microcode/intel-microcode-collection-20230520.tar.xz -> intel-microcode-collection-20230520.tar.xz )
-		https://api.github.com/repos/intel/Intel-Linux-Processor-Microcode-Data-Files/tarball/microcode-20230613 -> microcode-20230613.tar.gz"
+SRC_URI="!vanilla? ( https://dev.gentoo.org/~sam/distfiles/sys-firmware/intel-microcode/intel-microcode-collection-20230804.tar.xz -> intel-microcode-collection-20230804.tar.xz )
+		https://api.github.com/repos/intel/Intel-Linux-Processor-Microcode-Data-Files/tarball/microcode-20230808 -> microcode-20230808.tar.gz"
 
 LICENSE="intel-ucode"
 SLOT="0"
