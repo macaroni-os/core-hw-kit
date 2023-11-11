@@ -1,4 +1,4 @@
-BDEPEND=initramfs? ( app-arch/cpio )
+BDEPEND=initramfs? ( app-arch/cpio ) app-misc/rdfind
 DEFINED_PHASES=install postinst postrm preinst prepare prerm
 DESCRIPTION=Linux firmware files
 EAPI=7
@@ -11,4 +11,4 @@ RESTRICT=strip test
 SLOT=0
 SRC_URI=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20231111.tar.gz -> linux-firmware-20231111.tar.gz
 _eclasses_=ego	770e172d5c3e0d501d27925a01b44cbc	mount-boot	6aaf58c4a4a0f44626a2bf5483de6e7e
-_md5_=8ed16620ca77af08a0ab7e891448e1c8
+_md5_=040615c3830f4f5fe787f89dfd024071

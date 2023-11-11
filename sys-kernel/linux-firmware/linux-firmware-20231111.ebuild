@@ -14,7 +14,7 @@ KEYWORDS="*"
 RESTRICT="strip test"
 QA_PREBUILT="*"
 
-BDEPEND="initramfs? ( app-arch/cpio )"
+BDEPEND="initramfs? ( app-arch/cpio ) app-misc/rdfind"
 RDEPEND="initramfs? ( !<=app-admin/ego-2.8.5 )"
 
 src_prepare() {
