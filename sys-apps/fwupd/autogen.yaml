@@ -1,0 +1,26 @@
+fwupd_rule:
+  generator: github-1
+  defaults:
+    python_compat: python3+
+  packages:
+    - fwupd:
+        github:
+          user: fwupd
+          repo: fwupd
+          query: releases
+        select: '1.7.7'
+    - fwupd-efi:
+        revision:
+          '1.4': 1
+        github:
+          user: fwupd
+          repo: fwupd-efi
+          query: releases
+          tarball: fwupd-efi-{version}.tar.xz
+python_mods_rule:
+  generator: pypi-compat-1
+  defaults:
+    python_compat: python3+
+    cat: dev-python
+  packages:
+    - pefile

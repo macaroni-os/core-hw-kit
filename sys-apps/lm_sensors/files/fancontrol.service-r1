@@ -7,3 +7,4 @@ ExecStart=/usr/sbin/fancontrol
 
 [Install]
 WantedBy=multi-user.target
+
