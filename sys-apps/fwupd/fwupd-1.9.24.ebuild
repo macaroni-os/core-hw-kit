@@ -8,7 +8,7 @@ inherit bash-completion-r1 linux-info meson python-single-r1 vala xdg
 
 DESCRIPTION="Aims to make updating firmware on Linux automatic, safe and reliable"
 HOMEPAGE="https://fwupd.org"
-SRC_URI="https://github.com/fwupd/fwupd/tarball/5008e3fee09da9bf3e1cfba1364f9f7aa54b0efe -> fwupd-1.7.7-5008e3f.tar.gz"
+SRC_URI="https://github.com/fwupd/fwupd/tarball/eb1cd421abdbf2c9b3ba61219c21a79ca9d80ab2 -> fwupd-1.9.24-eb1cd42.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
@@ -107,7 +107,7 @@ src_prepare() {
 		-i plugins/meson.build || die #753521
 
 	sed -e "/install_dir.*'doc'/s/fwupd/${PF}/" \
-		-i data/builder/meson.build || die
+		-i data/meson.build || die
 
 	vala_src_prepare
 }
@@ -115,8 +115,6 @@ src_prepare() {
 src_configure() {
 	local plugins=(
 		-Dplugin_gpio="true"
-		$(meson_use amt plugin_amt)
-		$(meson_use dell plugin_dell)
 		$(meson_use fastboot plugin_fastboot)
 		$(meson_use flashrom plugin_flashrom)
 		$(meson_use gusb plugin_uf2)
@@ -127,7 +125,6 @@ src_configure() {
 		$(meson_use spi plugin_intel_spi)
 		$(meson_use synaptics plugin_synaptics_mst)
 		$(meson_use synaptics plugin_synaptics_rmi)
-		$(meson_use thunderbolt plugin_thunderbolt)
 		$(meson_use tpm plugin_tpm)
 		$(meson_use uefi plugin_uefi_capsule)
 		$(meson_use uefi plugin_uefi_capsule_splash)
@@ -172,6 +169,6 @@ src_install() {
 
 		# Don't timeout when fwupd is running (#673140)
 		sed '/^IdleTimeout=/s@=[[:digit:]]\+@=0@' \
-			-i "${ED}"/etc/${PN}/daemon.conf || die
+			-i "${ED}"/etc/${PN}/fwupd.conf || die
 	fi
 }
