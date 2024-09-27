@@ -7,5 +7,5 @@ KEYWORDS=*
 LICENSE=BSD
 RDEPEND=tools? ( media-libs/alsa-lib sys-libs/glibc )
 SLOT=0
-SRC_URI=https://github.com/thesofproject/sof-bin/releases/download/v2024.06/sof-bin-2024.06.tar.gz -> sof-bin-2024.06.tar.gz
-_md5_=10d6bc43714d42ec43a202b86da1e984
+SRC_URI=https://github.com/thesofproject/sof-bin/releases/download/v2024.09/sof-bin-2024.09.tar.gz -> sof-bin-2024.09.tar.gz
+_md5_=8a042b044aec39117df57da37c75c501
