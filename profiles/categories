@@ -3,6 +3,8 @@ app-laptop
 app-misc
 app-pda
 dev-libs
+net-wireless
+sys-apps
 sys-firmware
 sys-power
 virtual
