@@ -5,6 +5,9 @@ app-pda
 dev-libs
 net-wireless
 sys-apps
+sys-block
+sys-boot
 sys-firmware
+sys-libs
 sys-power
 virtual
