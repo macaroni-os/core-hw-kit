@@ -1,0 +1,10 @@
+libimobiledevice:
+  generator: github-1
+  packages:
+    - libimobiledevice:
+        version: 1.3.0_p20240401
+        github:
+          user: libimobiledevice
+          repo: libimobiledevice
+          query: snapshot
+          snapshot: 1ec2c2c5e3609cc02b302bcbd79ed2872260d350
