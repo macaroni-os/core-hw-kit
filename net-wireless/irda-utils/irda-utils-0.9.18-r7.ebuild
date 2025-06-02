@@ -1,3 +1,4 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -35,14 +36,11 @@ PATCHES=(
 	"${FILESDIR}/${P}-asneeded.patch"
 	"${FILESDIR}/${P}-ldflags.patch"
 	"${FILESDIR}/${P}-headers.patch"
-	"${FILESDIR}"/irdadump.patch
 )
 
 src_prepare() {
 	# TODO: switch to 'default' once udev.eclass is EAPI=6 clean
 	epatch -p1 "${PATCHES[@]}"
-
-	epatch_user
 
 	append-flags "-fno-strict-aliasing" # bug????
 
