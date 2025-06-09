@@ -28,9 +28,6 @@ RDEPEND="
 		virtual/libusb:1
 		sys-apps/usbutils
 	)
-	user-permissions? (
-		usb-monitor? ( acct-group/video )
-	)
 	X? (
 		x11-libs/libXrandr
 		x11-libs/libX11
