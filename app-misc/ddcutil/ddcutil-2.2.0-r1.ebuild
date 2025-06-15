@@ -28,6 +28,9 @@ RDEPEND="
 		virtual/libusb:1
 		sys-apps/usbutils
 	)
+	user-permissions? (
+		usb-monitor? ( acct-group/video )
+	)
 	X? (
 		x11-libs/libXrandr
 		x11-libs/libX11
@@ -78,9 +81,9 @@ src_configure() {
 src_install() {
 	default
 	if use user-permissions; then
-		udev_dorules data/etc/udev/rules.d/60-ddcutil-i2c.rules
+		udev_dorules data/usr/lib/udev/rules.d/60-ddcutil-i2c.rules
 		if use usb-monitor; then
-			udev_dorules data/etc/udev/rules.d/60-ddcutil-usb.rules
+			udev_dorules data/usr/lib/udev/rules.d/60-ddcutil-usb.rules
 		fi
 	fi
 }
