@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="bash-completion gtk-doc man systemd zsh-completion"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-BDEPEND="dev-util/glib-utils
+BDEPEND="
 	bash-completion? (
 	  >=app-shells/bash-completion-2.0
 	  $(python_gen_cond_dep '>=dev-python/shtab-1.7.0[${PYTHON_USEDEP}]')
